@@ -260,8 +260,7 @@ a:focus {
     transition: all .3s ease-in-out;
 }
 
-.social-icons a:hover,
-.social-icons a:focus {
+.social-icons a:hover {
     color: #0c1220;
     background-color: #c9963a;
     border-color: #c9963a;
