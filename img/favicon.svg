@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Option 23: Split-tone compass "A" — left half white, right half gold -->
+  <rect width="64" height="64" rx="8" fill="#0c1220"/>
+  <rect x="0" y="56" width="64" height="8" fill="#c9963a"/>
+  <clipPath id="leftHalf"><rect x="0" y="0" width="32" height="64"/></clipPath>
+  <clipPath id="rightHalf"><rect x="32" y="0" width="32" height="64"/></clipPath>
+  <path d="M32 10 L14 50 L18 50 L22 40 L42 40 L46 50 L50 50 Z M32 20 L24 38 L40 38 Z" clip-path="url(#leftHalf)" fill="#e8e4df"/>
+  <path d="M32 10 L14 50 L18 50 L22 40 L42 40 L46 50 L50 50 Z M32 20 L24 38 L40 38 Z" clip-path="url(#rightHalf)" fill="#c9963a"/>
+</svg>
