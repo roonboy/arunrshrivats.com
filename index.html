@@ -4,206 +4,1004 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Arun R Shrivats Personal Site">
+    <meta name="description" content="Arun R Shrivats — Engineer, Scientist, Strategist">
     <meta name="author" content="Arun R Shrivats">
-    <meta name="keywords" content="Arun R Shrivats, Biomedical Engineering, Carnegie Mellon, CMU, Lifenet Health, Harvard">
+    <meta name="keywords" content="Arun R Shrivats, Biomedical Engineering, Carnegie Mellon, CMU, Exact Sciences, Harvard, Wyss Institute">
+    <meta name="google-site-verification" content="ACS8FS3uIZS845VQPuW9UyNc2YnIIG_Gxxw8VELh3TI">
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 
     <title>Arun R Shrivats</title>
 
-    <!-- Google Verification -->
-    <meta name="google-site-verification" content="ACS8FS3uIZS845VQPuW9UyNc2YnIIG_Gxxw8VELh3TI" />
-
-    <!-- Bootstrap 5.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/grayscale.css" rel="stylesheet">
+    <!-- Fonts: Fraunces (editorial serif) + Figtree (friendly sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome 6 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- All styles inline — zero framework dependencies -->
+    <style>
+    /* ════════════════════════════════════════════════════════════════
+       DESIGN TOKENS
+       ════════════════════════════════════════════════════════════════ */
+    :root {
+        --cream:        #faf7f2;
+        --paper:        #ffffff;
+        --ink:          #1a1612;
+        --ink-soft:     #4a433c;
+        --stone:        #8a8073;
+        --line:         #e4ddd2;
+        --forest:       #2d4a3e;
+        --forest-hover: #3a5f50;
+        --ochre:        #c9872c;
+        --ochre-soft:   #e8c988;
+
+        --font-display: 'Fraunces', Georgia, serif;
+        --font-body:    'Figtree', -apple-system, sans-serif;
+
+        --space-xs:  0.5rem;
+        --space-sm:  1rem;
+        --space-md:  2rem;
+        --space-lg:  4rem;
+        --space-xl:  6rem;
+
+        --content-max:  44rem;
+        --content-wide: 56rem;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       RESET & BASE
+       ════════════════════════════════════════════════════════════════ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+    }
+
+    body {
+        font-family: var(--font-body);
+        font-size: 1.0625rem;
+        line-height: 1.7;
+        color: var(--ink);
+        background: var(--cream);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+
+    ::selection {
+        background: var(--ochre-soft);
+        color: var(--ink);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ════════════════════════════════════════════════════════════════ */
+    h1, h2, h3 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        line-height: 1.15;
+        letter-spacing: -0.015em;
+        font-variation-settings: 'SOFT' 50, 'WONK' 0;
+    }
+
+    h1 {
+        font-size: clamp(2.75rem, 7vw, 5rem);
+        font-variation-settings: 'SOFT' 70, 'WONK' 0;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        margin-bottom: var(--space-md);
+    }
+
+    p {
+        margin-bottom: 1.25rem;
+        max-width: var(--content-max);
+    }
+
+    a {
+        color: var(--forest);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    a:hover { color: var(--forest-hover); }
+
+    p a {
+        position: relative;
+        font-weight: 500;
+    }
+
+    p a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background: var(--ochre);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+
+    p a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════════════════════════════ */
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem var(--space-md);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(250, 247, 242, 0);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        transition: background 0.3s ease, backdrop-filter 0.3s ease,
+                    border-color 0.3s ease, padding 0.3s ease;
+        border-bottom: 1px solid transparent;
+    }
+
+    .nav.scrolled {
+        background: rgba(250, 247, 242, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom-color: var(--line);
+        padding: 0.875rem var(--space-md);
+    }
+
+    .nav-brand {
+        font-family: var(--font-display);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--ink);
+        font-variation-settings: 'SOFT' 40;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .nav-logo {
+        border-radius: 4px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        font-weight: 500;
+        position: relative;
+        padding: 0.25rem 0;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--forest);
+        transform: scaleX(0);
+        transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--ink);
+        cursor: pointer;
+        padding: 0.25rem;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    @media (max-width: 720px) {
+        .nav { padding: 1rem 1.25rem; }
+        .nav.scrolled { padding: 0.75rem 1.25rem; }
+        .nav-toggle { display: block; }
+        .nav-links {
+            position: fixed;
+            top: 3.5rem;
+            right: 1rem;
+            flex-direction: column;
+            gap: 0;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 0 12px 32px -8px rgba(26, 22, 18, 0.12);
+            transform: scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .nav-links.open {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .nav-links a {
+            padding: 0.75rem 1.5rem;
+            display: block;
+        }
+        .nav-links a::after { display: none; }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════════════════════════ */
+    .hero {
+        min-height: 88vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: var(--space-xl) var(--space-md) var(--space-lg);
+        position: relative;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        width: 140%;
+        height: 80%;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center,
+            rgba(45, 74, 62, 0.06) 0%,
+            rgba(45, 74, 62, 0) 60%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero h1 {
+        margin-bottom: var(--space-sm);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rise 0.9s 0.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .hero-tagline {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: clamp(1rem, 2.2vw, 1.375rem);
+        color: var(--stone);
+        letter-spacing: 0.08em;
+        font-weight: 400;
+        font-variation-settings: 'SOFT' 100;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rise 0.9s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .hero-tagline .sep {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ochre);
+        opacity: 0.7;
+    }
+
+    .hero-scroll {
+        position: absolute;
+        bottom: var(--space-lg);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--stone);
+        opacity: 0;
+        animation: rise 0.9s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+                   float 2.4s 1.5s ease-in-out infinite;
+        transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .hero-scroll:hover {
+        border-color: var(--forest);
+        color: var(--forest);
+        background: var(--paper);
+    }
+
+    @keyframes rise {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50%      { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       SECTIONS
+       ════════════════════════════════════════════════════════════════ */
+    .section {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .container {
+        max-width: var(--content-wide);
+        margin: 0 auto;
+    }
+
+    .section-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-lg);
+        gap: 1rem;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to var(--dir, right),
+            transparent, var(--line) 20%, var(--line));
+        max-width: 8rem;
+    }
+
+    .section-divider::before { --dir: right; }
+    .section-divider::after  { --dir: left; }
+
+    .section-divider .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--ochre);
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       ABOUT
+       ════════════════════════════════════════════════════════════════ */
+    .about-grid {
+        display: grid;
+        grid-template-columns: minmax(200px, 280px) 1fr;
+        gap: var(--space-lg);
+        align-items: start;
+        margin-top: var(--space-md);
+    }
+
+    .about-photo {
+        position: sticky;
+        top: 7rem;
+    }
+
+    .about-photo img {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 24px -12px rgba(26, 22, 18, 0.15);
+    }
+
+    .about-text p {
+        color: var(--ink-soft);
+    }
+
+    .cv-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        margin-top: var(--space-sm);
+        background: var(--forest);
+        color: var(--cream);
+        font-weight: 500;
+        font-size: 0.95rem;
+        border-radius: 100px;
+        transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .cv-link:hover {
+        background: var(--forest-hover);
+        color: var(--cream);
+        transform: translateY(-2px);
+    }
+
+    .cv-link i { font-size: 0.9rem; }
+
+    @media (max-width: 840px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+        }
+        .about-photo {
+            position: static;
+            max-width: 220px;
+            margin: 0 auto;
+        }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       PORTFOLIO — FILTER PILLS
+       ════════════════════════════════════════════════════════════════ */
+    .filter-pills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: var(--space-lg);
+    }
+
+    .filter-pill {
+        padding: 0.5rem 1.25rem;
+        background: transparent;
+        border: 1.5px solid var(--line);
+        border-radius: 100px;
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--ink-soft);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .filter-pill:hover {
+        border-color: var(--forest);
+        color: var(--forest);
+    }
+
+    .filter-pill.active {
+        background: var(--forest);
+        border-color: var(--forest);
+        color: var(--cream);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       PORTFOLIO — PUBLICATION LIST
+       ════════════════════════════════════════════════════════════════ */
+    .pub-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .pub-item {
+        position: relative;
+        padding: 1.5rem 1.5rem 1.5rem 2rem;
+        border-left: 3px solid var(--line);
+        background: transparent;
+        border-radius: 0 8px 8px 0;
+        transition: border-color 0.25s ease, background 0.25s ease,
+                    opacity 0.3s ease, transform 0.3s ease,
+                    max-height 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+        max-height: 500px;
+        overflow: hidden;
+    }
+
+    .pub-item:hover {
+        border-left-color: var(--ochre);
+        background: var(--paper);
+    }
+
+    .pub-item.hidden {
+        opacity: 0;
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 0;
+        transform: translateX(-8px);
+        border-left-width: 0;
+    }
+
+    .pub-type {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--forest);
+        margin-bottom: 0.5rem;
+        padding: 0.2rem 0.6rem;
+        background: rgba(45, 74, 62, 0.08);
+        border-radius: 4px;
+    }
+
+    .pub-citation {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--ink-soft);
+        margin-bottom: 0.5rem;
+    }
+
+    .pub-citation b {
+        color: var(--ink);
+        font-weight: 600;
+    }
+
+    .pub-citation em {
+        color: var(--stone);
+    }
+
+    .pub-links {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .pub-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        color: var(--stone);
+        background: transparent;
+        transition: all 0.2s ease;
+    }
+
+    .pub-links a:hover {
+        background: var(--forest);
+        color: var(--cream);
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 720px) {
+        .pub-item {
+            padding: 1.25rem 1rem 1.25rem 1.25rem;
+        }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       CONNECT
+       ════════════════════════════════════════════════════════════════ */
+    .connect { text-align: center; }
+
+    .connect-intro {
+        color: var(--ink-soft);
+        margin: 0 auto var(--space-md);
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: var(--space-lg);
+    }
+
+    .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1.5px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 1.25rem;
+        transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .social-icons a:hover {
+        background: var(--forest);
+        border-color: var(--forest);
+        color: var(--cream);
+        transform: translateY(-4px) scale(1.05);
+    }
+
+    .back-top {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1.5px solid var(--line);
+        color: var(--stone);
+        transition: all 0.2s ease;
+    }
+
+    .back-top:hover {
+        border-color: var(--ochre);
+        color: var(--ochre);
+        background: var(--paper);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════════════ */
+    footer {
+        text-align: center;
+        padding: var(--space-md);
+        border-top: 1px solid var(--line);
+        font-size: 0.875rem;
+        color: var(--stone);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════════════════════════ */
+    @media (max-width: 720px) {
+        .section { padding: var(--space-lg) 1.25rem; }
+        .hero { min-height: 78vh; padding-top: 6rem; }
+        .hero-scroll { bottom: var(--space-md); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        .reveal { opacity: 1; transform: none; }
+        html { scroll-behavior: auto; }
+    }
+    </style>
 </head>
 
-<body id="page-top">
+<body id="top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-custom navbar-expand-md fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#page-top">Arun R Shrivats, PhD</a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#connect">Connect</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <!-- ═══════════════════════════════════════════════════════════════
+         NAVIGATION
+         ═══════════════════════════════════════════════════════════════ -->
+    <nav class="nav" id="nav">
+        <a href="#top" class="nav-brand">
+            <img src="img/favicon.svg" alt="" class="nav-logo" width="28" height="28">
+            Arun R Shrivats, PhD
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#connect">Connect</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+        </ul>
     </nav>
 
-    <!-- Intro Header -->
-    <header class="intro">
-        <div class="intro-body">
-            <h1 class="brand-heading">Arun R Shrivats, PhD</h1>
-            <p class="intro-text">Product | Strategy | Operations</p>
-            <a href="#about" class="btn btn-circle">
-                <i class="fa-solid fa-chevron-down"></i>
-            </a>
+    <!-- ═══════════════════════════════════════════════════════════════
+         HERO
+         ═══════════════════════════════════════════════════════════════ -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Arun R Shrivats</h1>
+            <p class="hero-tagline">
+                <span>Product</span>
+                <span class="sep"></span>
+                <span>Strategy</span>
+                <span class="sep"></span>
+                <span>Operations</span>
+            </p>
         </div>
+        <a href="#about" class="hero-scroll" aria-label="Scroll to about">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="about-section content-section text-center">
+    <!-- ═══════════════════════════════════════════════════════════════
+         ABOUT
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="about" class="section">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h2>About Me</h2>
+            <div class="section-divider reveal"><span class="dot"></span></div>
+            <h2 class="reveal">About</h2>
 
-                    <p><img src="img/2025_08_ArunRShrivats.jpeg" class="profile-img" alt="Arun R. Shrivats"></p>
+            <div class="about-grid">
+                <div class="about-photo reveal">
+                    <img src="img/2025_08_ArunRShrivats.jpeg" alt="Arun R. Shrivats">
+                </div>
 
-                    <p>I bring a decade of healthcare product experience built on a foundation in genome editing bench research. At <a href="https://www.exactsciences.com/" target="_blank">Exact Sciences</a>, I've combined product, strategy, operations, and partnerships in the pursuit of eradicating cancer.</p>
+                <div class="about-text reveal">
+                    <p>I bring a decade of healthcare product experience built on a foundation in genome editing bench research. At <a href="https://www.exactsciences.com/" target="_blank" rel="noopener">Exact Sciences</a>, I've combined product, strategy, operations, and partnerships in the pursuit of eradicating cancer.</p>
 
                     <p>Today, I lead a $700M global early-stage cancer diagnostics business. My portfolio spans Oncotype DX, Riskguard hereditary cancer testing, AI-powered digital pathology products, and a multi-product portfolio platform serving oncologists, surgeons, pathologists, and genetic counselors. I lead cross-functional initiatives across R&D, clinical, medical, operations, marketing, training, and sales to bring cancer diagnostics to market at scale. Previously, I led Exact's Corporate Strategy team focused on the Oncology and International businesses.</p>
 
-                    <p>Prior to Exact, I spent ~5 years as a strategic partner to pharma, biotech, diagnostics, and tools organizations, first at <a href="https://www.lek.com/" target="_blank">L.E.K. Consulting</a> (leaving as Engagement Manager) and later at Prescient Advisory, where I helped build an advisory team within the <a href="https://prescienthg.com/" target="_blank">Prescient Healthcare Group</a>.</p>
+                    <p>Prior to Exact, I spent ~5 years as a strategic partner to pharma, biotech, diagnostics, and tools organizations, first at <a href="https://www.lek.com/" target="_blank" rel="noopener">L.E.K. Consulting</a> (leaving as Engagement Manager) and later at Prescient Advisory, where I helped build an advisory team within the <a href="https://prescienthg.com/" target="_blank" rel="noopener">Prescient Healthcare Group</a>.</p>
 
-                    <p>Before consulting, I worked at Harvard University's <a href="https://wyss.harvard.edu/" target="_blank">Wyss Institute</a> (<a href="https://diseasebiophysics.seas.harvard.edu/" target="_blank">Disease Biophysics Group</a>), where I helped develop microphysiological chip-based platforms to model functional and diseased organ states and support drug development for complex diseases. I had the opportunity to patent this technology and navigate an out-licensing agreement through an appointment with Harvard's <a href="https://otd.harvard.edu/" target="_blank">Office of Technology Development</a>. Earlier experiences include <a href="https://www.lifenethealth.org/" target="_blank">LifeNet Health</a>, <a href="https://www.cmu.edu/bme/" target="_blank">Carnegie Mellon University</a>, and the <a href="https://engsci.utoronto.ca/" target="_blank">University of Toronto</a>.</p>
+                    <p>Before consulting, I worked at Harvard University's <a href="https://wyss.harvard.edu/" target="_blank" rel="noopener">Wyss Institute</a> (<a href="https://diseasebiophysics.seas.harvard.edu/" target="_blank" rel="noopener">Disease Biophysics Group</a>), where I helped develop microphysiological chip-based platforms to model functional and diseased organ states and support drug development for complex diseases. I had the opportunity to patent this technology and navigate an out-licensing agreement through an appointment with Harvard's <a href="https://otd.harvard.edu/" target="_blank" rel="noopener">Office of Technology Development</a>. Earlier experiences include <a href="https://www.lifenethealth.org/" target="_blank" rel="noopener">LifeNet Health</a>, <a href="https://www.cmu.edu/bme/" target="_blank" rel="noopener">Carnegie Mellon University</a>, and the <a href="https://engsci.utoronto.ca/" target="_blank" rel="noopener">University of Toronto</a>.</p>
 
                     <p>Outside of work, I enjoy playing golf and tennis, cycling around San Francisco, and family trips to state and national parks.</p>
-                    <div class="social-icons">
-                        <a href="../files/ArunRShrivats_cv.pdf" target="_blank"><i class="fa-solid fa-file-lines"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio-section content-section text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h2>Portfolio</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="gallery-category">
-                    <a class="active" data-filter="gallery">All</a> / <a data-filter="gallery-insights">Insights</a> / <a data-filter="gallery-journal">Journal</a> / <a data-filter="gallery-review">Review</a> / <a data-filter="gallery-chapter">Book Chapter</a> / <a data-filter="gallery-conference">Conference</a>
-                </div>
-            </div>
-
-            <ul class="project-gallery">
-                <li class="gallery gallery-insights" data-group="gallery-insights">
-                    Kfoury, J., <b>Shrivats, A.R.</b>, Robertson, S., Grabenstatter, K. (2017) The New Normal for Biopharma as Price Growth Finally Slows. L.E.K. Insights.<a href="https://www.lek.com/insights/new-normal-biopharma-price-growth-finally-slows" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2017_LEK_Biopharma_Drug_Pricing_Growth.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    <b>Shrivats, A.R.</b>,  McDermott, M.C., Klimak, M., Averick, S., Pan, H., Matyjaszewski, M., Mishina, Y., Hollinger, J.O. (2015) Nanogel-mediated RNAi Against Runx2 and Osx Inhibits Osteogenic Differentiation in Constitutively Active BMPR1A Osteoblasts. ACS Biomaterials Science and Engineering.<a href="https://pubs.acs.org/doi/abs/10.1021/acsbiomaterials.5b00294" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2015_Shrivats_ACS Biomaterials Science and Engineering.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    <b>Shrivats, A.R.</b>,  Mishina, Y., Averick, S., Matyjaszewski, M.,  Hollinger, J.O. (2015) In Vivo GFP Knockdown by Cationic Nanogel-siRNA Polyplexes. Bioengineering 2 (3), 160-175.<a href="https://www.mdpi.com/2306-5354/2/3/160/htm" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2015_Shrivats_Bioengineering.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    <b>Shrivats, A.R.</b>, Mackenzie, M.C., Konkolewicz, D., Averick, S.E., McDermott, M.C., Hollinger, J.O. Matyjaszewski, K. (2015) Synthesis of Poly(meth)acrylates with Thioether and Tertiary Sulfonium Groups by ARGET ATRP and their use as siRNA Delivery Agents. Biomacromolecules 16 (1), 236-245.<a href="https://pubs.acs.org/doi/abs/10.1021/bm501449a" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2015_Shrivats_Biomacromolecules.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-conference" data-group="gallery-conference">
-                    <b>Shrivats, A.R.</b> (2014). Inhibition of Osteogenic Differentiation by Nanogel-Mediated siRNA Delivery. FOP Drug Development Forum (Boston, Massachusetts). November 20th, 2014. <em>Podium</em>.
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    <b>Shrivats, A.R.</b>, Hsu, E., Averick, S., Klimak, M., Watt, A.C.S., DeMaio, M., Matyjaszewski, K., Hollinger, J.O. (2014) Cationic Nanogel-mediated Runx2 and Osterix siRNA Delivery Decreases Mineralization in MC3T3 Cells. Clinical Orthopaedics and Related Research.<a href="https://link.springer.com/article/10.1007/s11999-014-4073-0" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2014_Shrivats_CORR.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-review" data-group="gallery-review">
-                    <b>Shrivats, A.R.</b>, McDermott M.C., Hollinger, J.O. (2014) Bone Tissue Engineering: State of the Union. Drug Discovery Today 19 (6), 781-786.<a href="https://www.sciencedirect.com/science/article/pii/S1359644614001354" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2014_Shrivats_Drug Discovery Today.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-review" data-group="gallery-review">
-                    <b>Shrivats, A.R.</b>, and Hollinger, J.O. (2014). The Delivery and Evaluation of RNAi Therapeutics for Heterotopic Ossification Pathologies. In Biomimetics and Stem Cells, Methods in Molecular Biology 1202, 149-160.<a href="https://link.springer.com/protocol/10.1007/7651_2013_34" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-conference" data-group="gallery-conference">
-                    <b>Shrivats, A.R.</b>, McDermott, M.C., Averick, S., Cho, H., McKenzie, M., Matyjaszewski, K., Mishina, Y., et al. (2014). RNA Interference Therapeutics For Fibrodysplasia Ossificans Progressiva. In Orthopaedic Research Society (New Orleans, Louisiana). March 18th, 2014. <em>Podium</em>.
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    Hsu, E.W., Liu, S., <b>Shrivats, A.R.</b>, Watt, A.C.S., McBride,..., Matyjaszewski, K., and Hollinger, J.O. (2014). Cationic Nanostructured Polymers for siRNA Delivery in Murine Calvarial Pre-Osteoblasts. Journal of Biomedical Nanotechnology 10 (6), 1130-1136.<a href="https://www.ingentaconnect.com/content/asp/jbn/2014/00000010/00000006/art00022" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2014_Hsu_Journal of Biomedical Nanotechnology.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-conference" data-group="gallery-conference">
-                    <b>Shrivats, A.R.</b>, Liu, S., Watt, A., Hsu, E., Averick, S., Cho, H., Alvarez, P., McBride, S., Mishina, Y., et al. (2013). The Next Generation of Cationic Polymers for Gene Delivery. In Material Science and Technology (Montreal, Quebec). October 30th, 2013. <em>Podium</em>.
-                </li>
-                <li class="gallery gallery-chapter" data-group="gallery-chapter">
-                    Hsu, E., Alvarez, P, Schutte, L, Donovan, A., Liu, S., <b>Shrivats, A.R.</b>, Hollinger, J.O. (2013). Animal Models and Clinical Applications: Bone Regeneration. Biomaterials and Regenerative Medicine. Cambridge University Press. <em>In press</em>.
-                </li>
-                <li class="gallery gallery-conference" data-group="gallery-conference">
-                    <b>Shrivats, A.R.</b>, Hsu, E., Watt, A., McBride, S., Liu, S., Alvarez-Urena, P., Averick, S., Cho, H., Paredes, E., et al. (2013). The development of safe and effective polymeric carriers for siRNA delivery. In Society for Biomaterials (Boston, Massachusetts). April 13th, 2013. <em>Podium</em>.
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    Averick, S.E., Paredes, E., Irastorza, A., <b>Shrivats, A.R.</b>, Srinivasan, A., Siegwart, D.J., Magenau, A.J., Cho, H.Y., Hsu, E., Averick, A.A., et al. (2012). Preparation of cationic nanogels for nucleic acid delivery. Biomacromolecules 13, 3445-3449.<a href="https://pubs.acs.org/doi/abs/10.1021/bm301166s" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2012_Averick_Biomacromolecules.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-chapter" data-group="gallery-chapter">
-                    <b>Shrivats, A.R.</b>, Alvarez-Urena, P., Schutte, L., and Hollinger, J.O. (2012). Bone Regeneration. In Principles of Tissue Engineering, R. Lanza, R. Langer, and J.P. Vacanti, eds. <em>In press</em>.
-                </li>
-                <li class="gallery gallery-chapter" data-group="gallery-chapter">
-                    Rauh, F., Dornish, M., Street, R., and <b>Shrivats, A.R.</b> (2011). Complex Polysaccharides: Chitosan and Alginate. In An Introduction to Biomaterials, Second Edition, J.O. Hollinger, ed. (CRC Press). <em>In press</em>.
-                </li>
-                <li class="gallery gallery-journal" data-group="gallery-journal">
-                    Cho, H.Y., Srinivasan, A., Hong, J., Hsu, E., Liu, S., <b>Shrivats, A.</b>, Kwak, D., Bohaty, A.K., Paik, H.J., Hollinger, J.O., et al. (2011). Synthesis of biocompatible PEG-Based star polymers with cationic and degradable core for siRNA delivery. Biomacromolecules 12, 3478-3486.<a href="https://pubs.acs.org/doi/abs/10.1021/bm2006455" target="_blank"><i class="fa-solid fa-circle-chevron-right fa-fw"></i></a><a href="../files/2011_Cho_Biomacromolecules.pdf" target="_blank"><i class="fa-regular fa-file-pdf fa-fw"></i></a>
-                </li>
-                <li class="gallery gallery-conference" data-group="gallery-conference">
-                    Srinivasan, A., Sriram, S., Watt, A., Hsu, E., <b>Shrivats, A.</b>, Cho, H., Matyjaszewski, K., and Hollinger, J. (2010). Delivery of siRNA Using Cationic Nanostructured Star Polymers to Prevent Myoblast Cell Differentiation to Bone. In Tissue Engineering and Regenerative Medicine International Society (Orlando, Florida). <em>Podium</em>.
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Connect Section -->
-    <section id="connect" class="connect-section content-section text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h2>Connect</h2>
-                    <p>Feel free to connect with me at any of the following:</p>
-                    <div class="social-icons">
-                        <a href="mailto:arun@shrivats.com"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="https://www.linkedin.com/in/arunrshrivats" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://scholar.google.ca/citations?user=JeaoOkMAAAAJ" target="_blank"><i class="fa-solid fa-graduation-cap"></i></a>
-
-                    </div>
-                    <br>
-                    <a href="#page-top" class="btn btn-circle">
-                        <i class="fa-solid fa-chevron-up"></i>
+                    <a href="../files/ArunRShrivats_cv.pdf" target="_blank" rel="noopener" class="cv-link">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Download CV</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-section">
-            <div class="container text-center">
-                <p><small>Copyright &copy; 2026 Arun R Shrivats</small></p>
+    <!-- ═══════════════════════════════════════════════════════════════
+         CONNECT
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="connect" class="section connect">
+        <div class="container">
+            <div class="section-divider reveal"><span class="dot"></span></div>
+            <h2 class="reveal">Connect</h2>
+            <p class="connect-intro reveal">Feel free to connect with me at any of the following:</p>
+
+            <div class="social-icons reveal">
+                <a href="mailto:arun@shrivats.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/arunrshrivats" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://scholar.google.ca/citations?user=JeaoOkMAAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
             </div>
+
+            <a href="#top" class="back-top reveal" aria-label="Back to top">
+                <i class="fa-solid fa-chevron-up"></i>
+            </a>
         </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PORTFOLIO
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <div class="section-divider reveal"><span class="dot"></span></div>
+            <h2 class="reveal" style="text-align:center">Portfolio</h2>
+
+            <div class="filter-pills reveal">
+                <button class="filter-pill active" data-filter="all">All</button>
+                <button class="filter-pill" data-filter="insights">Insights</button>
+                <button class="filter-pill" data-filter="journal">Journal</button>
+                <button class="filter-pill" data-filter="review">Review</button>
+                <button class="filter-pill" data-filter="chapter">Book Chapter</button>
+                <button class="filter-pill" data-filter="conference">Conference</button>
+            </div>
+
+            <ul class="pub-list reveal">
+
+                <li class="pub-item" data-type="insights">
+                    <span class="pub-type">Insights · 2017</span>
+                    <p class="pub-citation">Kfoury, J., <b>Shrivats, A.R.</b>, Robertson, S., Grabenstatter, K. (2017) The New Normal for Biopharma as Price Growth Finally Slows. L.E.K. Insights.</p>
+                    <div class="pub-links">
+                        <a href="https://www.lek.com/insights/new-normal-biopharma-price-growth-finally-slows" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2017_LEK_Biopharma_Drug_Pricing_Growth.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2015</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, McDermott, M.C., Klimak, M., Averick, S., Pan, H., Matyjaszewski, M., Mishina, Y., Hollinger, J.O. (2015) Nanogel-mediated RNAi Against Runx2 and Osx Inhibits Osteogenic Differentiation in Constitutively Active BMPR1A Osteoblasts. ACS Biomaterials Science and Engineering.</p>
+                    <div class="pub-links">
+                        <a href="https://pubs.acs.org/doi/abs/10.1021/acsbiomaterials.5b00294" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2015_Shrivats_ACS Biomaterials Science and Engineering.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2015</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, Mishina, Y., Averick, S., Matyjaszewski, M., Hollinger, J.O. (2015) In Vivo GFP Knockdown by Cationic Nanogel-siRNA Polyplexes. Bioengineering 2 (3), 160-175.</p>
+                    <div class="pub-links">
+                        <a href="https://www.mdpi.com/2306-5354/2/3/160/htm" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2015_Shrivats_Bioengineering.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2015</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, Mackenzie, M.C., Konkolewicz, D., Averick, S.E., McDermott, M.C., Hollinger, J.O., Matyjaszewski, K. (2015) Synthesis of Poly(meth)acrylates with Thioether and Tertiary Sulfonium Groups by ARGET ATRP and their use as siRNA Delivery Agents. Biomacromolecules 16 (1), 236-245.</p>
+                    <div class="pub-links">
+                        <a href="https://pubs.acs.org/doi/abs/10.1021/bm501449a" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2015_Shrivats_Biomacromolecules.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="conference">
+                    <span class="pub-type">Conference · 2014</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b> (2014). Inhibition of Osteogenic Differentiation by Nanogel-Mediated siRNA Delivery. FOP Drug Development Forum (Boston, Massachusetts). November 20th, 2014. <em>Podium</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2014</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, Hsu, E., Averick, S., Klimak, M., Watt, A.C.S., DeMaio, M., Matyjaszewski, K., Hollinger, J.O. (2014) Cationic Nanogel-mediated Runx2 and Osterix siRNA Delivery Decreases Mineralization in MC3T3 Cells. Clinical Orthopaedics and Related Research.</p>
+                    <div class="pub-links">
+                        <a href="https://link.springer.com/article/10.1007/s11999-014-4073-0" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2014_Shrivats_CORR.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="review">
+                    <span class="pub-type">Review · 2014</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, McDermott M.C., Hollinger, J.O. (2014) Bone Tissue Engineering: State of the Union. Drug Discovery Today 19 (6), 781-786.</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S1359644614001354" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2014_Shrivats_Drug Discovery Today.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="review">
+                    <span class="pub-type">Review · 2014</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, and Hollinger, J.O. (2014). The Delivery and Evaluation of RNAi Therapeutics for Heterotopic Ossification Pathologies. In Biomimetics and Stem Cells, Methods in Molecular Biology 1202, 149-160.</p>
+                    <div class="pub-links">
+                        <a href="https://link.springer.com/protocol/10.1007/7651_2013_34" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="conference">
+                    <span class="pub-type">Conference · 2014</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, McDermott, M.C., Averick, S., Cho, H., McKenzie, M., Matyjaszewski, K., Mishina, Y., et al. (2014). RNA Interference Therapeutics For Fibrodysplasia Ossificans Progressiva. In Orthopaedic Research Society (New Orleans, Louisiana). March 18th, 2014. <em>Podium</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2014</span>
+                    <p class="pub-citation">Hsu, E.W., Liu, S., <b>Shrivats, A.R.</b>, Watt, A.C.S., McBride,..., Matyjaszewski, K., and Hollinger, J.O. (2014). Cationic Nanostructured Polymers for siRNA Delivery in Murine Calvarial Pre-Osteoblasts. Journal of Biomedical Nanotechnology 10 (6), 1130-1136.</p>
+                    <div class="pub-links">
+                        <a href="https://www.ingentaconnect.com/content/asp/jbn/2014/00000010/00000006/art00022" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2014_Hsu_Journal of Biomedical Nanotechnology.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="conference">
+                    <span class="pub-type">Conference · 2013</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, Liu, S., Watt, A., Hsu, E., Averick, S., Cho, H., Alvarez, P., McBride, S., Mishina, Y., et al. (2013). The Next Generation of Cationic Polymers for Gene Delivery. In Material Science and Technology (Montreal, Quebec). October 30th, 2013. <em>Podium</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="chapter">
+                    <span class="pub-type">Book Chapter · 2013</span>
+                    <p class="pub-citation">Hsu, E., Alvarez, P, Schutte, L, Donovan, A., Liu, S., <b>Shrivats, A.R.</b>, Hollinger, J.O. (2013). Animal Models and Clinical Applications: Bone Regeneration. Biomaterials and Regenerative Medicine. Cambridge University Press. <em>In press</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="conference">
+                    <span class="pub-type">Conference · 2013</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, Hsu, E., Watt, A., McBride, S., Liu, S., Alvarez-Urena, P., Averick, S., Cho, H., Paredes, E., et al. (2013). The development of safe and effective polymeric carriers for siRNA delivery. In Society for Biomaterials (Boston, Massachusetts). April 13th, 2013. <em>Podium</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2012</span>
+                    <p class="pub-citation">Averick, S.E., Paredes, E., Irastorza, A., <b>Shrivats, A.R.</b>, Srinivasan, A., Siegwart, D.J., Magenau, A.J., Cho, H.Y., Hsu, E., Averick, A.A., et al. (2012). Preparation of cationic nanogels for nucleic acid delivery. Biomacromolecules 13, 3445-3449.</p>
+                    <div class="pub-links">
+                        <a href="https://pubs.acs.org/doi/abs/10.1021/bm301166s" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2012_Averick_Biomacromolecules.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="chapter">
+                    <span class="pub-type">Book Chapter · 2012</span>
+                    <p class="pub-citation"><b>Shrivats, A.R.</b>, Alvarez-Urena, P., Schutte, L., and Hollinger, J.O. (2012). Bone Regeneration. In Principles of Tissue Engineering, R. Lanza, R. Langer, and J.P. Vacanti, eds. <em>In press</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="chapter">
+                    <span class="pub-type">Book Chapter · 2011</span>
+                    <p class="pub-citation">Rauh, F., Dornish, M., Street, R., and <b>Shrivats, A.R.</b> (2011). Complex Polysaccharides: Chitosan and Alginate. In An Introduction to Biomaterials, Second Edition, J.O. Hollinger, ed. (CRC Press). <em>In press</em>.</p>
+                </li>
+
+                <li class="pub-item" data-type="journal">
+                    <span class="pub-type">Journal · 2011</span>
+                    <p class="pub-citation">Cho, H.Y., Srinivasan, A., Hong, J., Hsu, E., Liu, S., <b>Shrivats, A.</b>, Kwak, D., Bohaty, A.K., Paik, H.J., Hollinger, J.O., et al. (2011). Synthesis of biocompatible PEG-Based star polymers with cationic and degradable core for siRNA delivery. Biomacromolecules 12, 3478-3486.</p>
+                    <div class="pub-links">
+                        <a href="https://pubs.acs.org/doi/abs/10.1021/bm2006455" target="_blank" rel="noopener" aria-label="View article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="../files/2011_Cho_Biomacromolecules.pdf" target="_blank" rel="noopener" aria-label="Download PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    </div>
+                </li>
+
+                <li class="pub-item" data-type="conference">
+                    <span class="pub-type">Conference · 2010</span>
+                    <p class="pub-citation">Srinivasan, A., Sriram, S., Watt, A., Hsu, E., <b>Shrivats, A.</b>, Cho, H., Matyjaszewski, K., and Hollinger, J. (2010). Delivery of siRNA Using Cationic Nanostructured Star Polymers to Prevent Myoblast Cell Differentiation to Bone. In Tissue Engineering and Regenerative Medicine International Society (Orlando, Florida). <em>Podium</em>.</p>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════════════════ -->
+    <footer>
+        <p>&copy; 2026 Arun R Shrivats</p>
     </footer>
 
-    <!-- Bootstrap 5.3 JS (only JS dependency) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ═══════════════════════════════════════════════════════════════
+         SCRIPTS — vanilla JS, zero dependencies
+         ═══════════════════════════════════════════════════════════════ -->
+    <script>
+    (function() {
+        // Nav: frosted glass on scroll
+        const nav = document.getElementById('nav');
+        const onScroll = () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-    <!-- Site JavaScript -->
-    <script src="js/grayscale.js"></script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+        // Close menu on outside tap (important for mobile UX)
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('open');
+            }
+        });
+
+        // Publication filter
+        const pills = document.querySelectorAll('.filter-pill');
+        const items = document.querySelectorAll('.pub-item');
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                const filter = pill.dataset.filter;
+                items.forEach(item => {
+                    const match = filter === 'all' || item.dataset.type === filter;
+                    item.classList.toggle('hidden', !match);
+                });
+            });
+        });
+
+        // Reveal on scroll via IntersectionObserver
+        const reveals = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            reveals.forEach(el => io.observe(el));
+        } else {
+            reveals.forEach(el => el.classList.add('visible'));
+        }
+    })();
+    </script>
 
     <!-- Analytics -->
     <script data-goatcounter="https://arunrshrivats.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
 </body>
-
 </html>
