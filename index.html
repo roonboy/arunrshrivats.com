@@ -58,6 +58,7 @@
     html {
         scroll-behavior: smooth;
         scroll-padding-top: 5rem;
+        overflow-x: hidden;
     }
 
     body {
@@ -267,15 +268,18 @@
         content: '';
         position: absolute;
         top: 10%;
-        left: 50%;
+        left: -20%;
         width: 140%;
         height: 80%;
-        transform: translateX(-50%);
         background: radial-gradient(ellipse at center,
             rgba(45, 74, 62, 0.06) 0%,
             rgba(45, 74, 62, 0) 60%);
         pointer-events: none;
         z-index: 0;
+    }
+
+    .hero {
+        overflow: hidden;
     }
 
     .hero-content {
@@ -462,6 +466,11 @@
             position: static;
             max-width: 220px;
             margin: 0 auto;
+        }
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 
